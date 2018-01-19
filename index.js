@@ -4,16 +4,6 @@ const db = new sqlite3.Database('./db/company.db',(err)=>{
     else console.log('Connect sukses')
 });
 
-function ONETOMANY(cb){
-    db.all(`SELECT Projects.* , Managers.name AS name_manager FROM Projects LEFT JOIN Managers ON Projects.managerId = Managers.id`,(err, data)=>{
-        if(!err){
-            cb(null,data)
-        }else{
-            cb(err,null)
-        }
-    })
-}
-
 function MANYTOMANY(){
     var employeeProjects = new Promise((resolve,reject)=>{
         db.all(`SELECT Employees.*, Projects.* 
